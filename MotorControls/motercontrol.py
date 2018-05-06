@@ -42,12 +42,12 @@ class RoboDrive:
         motorstr = '{},{},{},{}'.format(flstr,blstr,frstr,brstr)
         return motorstr
 
-    def arcturn(self,speed,angle): #WRONG WAY!!!!!!!!!!!
+    def arcturn(self,speed,angle):
         turn_adjustment = np.cos(np.pi*angle/180.0)
         if angle >= 0:
             left_factor = 1
             right_factor = int(turn_adjustment)
-        elif angle <=0:left_factor = 1
+        elif angle <=0:
             left_factor = int(turn_adjustment)
             right_factor = 1
 
