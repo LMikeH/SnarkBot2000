@@ -1,7 +1,7 @@
 
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
-#include "utility/Adafruit_MS_PWMServoDriver.h"
+#include <utility/Adafruit_MS_PWMServoDriver.h>
 
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
 Adafruit_DCMotor *frontleft_motor = AFMS.getMotor(1);
@@ -15,14 +15,20 @@ void setup() {
   AFMS.begin();
 }
 
+int lfspd = 0;
+int lbspd = 0;
+int rfspd = 0;
+int rbspd = 0;
+
 void loop() {
 
     if (Serial.available()) {
-
+        delay(2000);
+        continue;
     }
     else {
-        motor1->setSpeed(0)
-        motor1->run(RELEASE)
+        motor1->setSpeed(0);
+        motor1->run(RELEASE);
     }
 
 }
