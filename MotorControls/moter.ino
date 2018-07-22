@@ -25,13 +25,6 @@ String rightstr;
 int sercount = 0;
 
 void loop() {
-    //int leftspd = 0;
-    //int rightspd = 0;
-    //String speedstr;
-    //String leftsign;
-    //String leftstr;
-    //String rightsign;
-    //String rightstr;
 
     if (Serial.available() > 0) {
         speedstr = Serial.readString();
@@ -49,19 +42,13 @@ void loop() {
         leftspd = 0;
         rightspd = 0;
     }
-    Serial.println(speedstr);
+    Serial.println("motor");
     
     frontleft_motor->setSpeed(leftspd);
-    //frontleft_motor->run(FORWARD);
-
     backleft_motor->setSpeed(leftspd);
-    //backleft_motor->run(FORWARD);
 
     frontright_motor->setSpeed(rightspd);
-    //frontright_motor->run(FORWARD);
-
     backright_motor->setSpeed(rightspd);
-    //backright_motor->run(FORWARD);
 
     if (leftsign == "-"){
         frontleft_motor->run(FORWARD);

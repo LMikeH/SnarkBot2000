@@ -2,7 +2,7 @@ import serial
 import time
 import numpy as np
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM1', 9600)
 #motorstr = str.encode('f100,b100')
 
 def speedstring(factor):

@@ -2,12 +2,14 @@ import serial
 import time
 import numpy as np
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 
-def frontsonic():
+def frontsonic(ser):
 
     try:
-        frontstr = ser.readline().decode()
+        frontstr = "motor"
+        while frontstr == "motor":
+            frontstr = ser.readline().decode()
         sonray = frontstr.split('\n')[0].split('_')
         return np.array(sonray,dtype=float)
     except ValueError:
@@ -15,4 +17,5 @@ def frontsonic():
 
     
 
-    
+#while True:
+#    print(frontsonic())
