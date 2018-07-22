@@ -14,38 +14,73 @@ void setup() {
   AFMS.begin();
 }
 
+
+int leftspd = 0;
+int rightspd = 0;
+String speedstr;
+String leftsign;
+String leftstr;
+String rightsign;
+String rightstr;
+int sercount = 0;
+
 void loop() {
+    //int leftspd = 0;
+    //int rightspd = 0;
+    //String speedstr;
+    //String leftsign;
+    //String leftstr;
+    //String rightsign;
+    //String rightstr;
 
-    int leftspd = 0;
-    int rightspd = 0;
+    if (Serial.available() > 0) {
+        speedstr = Serial.readString();
+        leftsign = speedstr.substring(0,1);
+        leftstr = speedstr.substring(1,4);
+        rightsign = speedstr.substring(5,6);
+        rightstr = speedstr.substring(6,9);
+        leftspd = leftstr.toInt();
+        rightspd = rightstr.toInt();
+        sercount = 0;
+    }
 
-    String speedstr;
-    speedstr = Serial.readString();
-    String leftsign = speedstr.substring(0,1);
-    String leftstr = speedstr.substring(1,4);
-    String rightsign = speedstr.substring(5,6);
-    String rightstr = speedstr.substring(6,9);
-    Serial.println(leftsign);
-
-    leftspd = leftstr.toInt();
-    rightspd = rightstr.toInt();
-
-
+    
+    if (sercount > 10) {
+        leftspd = 0;
+        rightspd = 0;
+    }
+    Serial.println(speedstr);
+    
     frontleft_motor->setSpeed(leftspd);
-    frontleft_motor->run(FORWARD);
+    //frontleft_motor->run(FORWARD);
 
     backleft_motor->setSpeed(leftspd);
-    backleft_motor->run(FORWARD);
-
-    //if (leftsign == '-') {
-    //    Serial.println(leftsign);
-    //}
+    //backleft_motor->run(FORWARD);
 
     frontright_motor->setSpeed(rightspd);
-    frontright_motor->run(FORWARD);
+    //frontright_motor->run(FORWARD);
 
     backright_motor->setSpeed(rightspd);
-    backright_motor->run(FORWARD);
+    //backright_motor->run(FORWARD);
 
+    if (leftsign == "-"){
+        frontleft_motor->run(FORWARD);
+        backleft_motor->run(FORWARD);
+    }
+    else {
+        frontleft_motor->run(BACKWARD);
+        backleft_motor->run(BACKWARD);
+    }
+
+    if (rightsign == "-"){
+        frontright_motor->run(FORWARD);
+        backright_motor->run(FORWARD);
+    }
+    else {
+        frontright_motor->run(BACKWARD);
+        backright_motor->run(BACKWARD);
+    }
+        
+    sercount += 1;
     delay(50);
 }

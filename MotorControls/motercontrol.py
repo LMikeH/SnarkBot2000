@@ -5,24 +5,26 @@ ser = serial.Serial('/dev/ttyACM0', 9600)
 motorstr = str.encode('-023,-255,+000,+040')
 
 
-def speedstring(factor):
+ef speedstring(factor):
     """
     Utility function, makes string for serial
     from speed integer. 
     example:
     220 --> '+220'
     """ 
+    factor = int(factor)
     if factor >= 0:
         sign = '+'
     else:
         sign = '-'
+        factor = - factor
 
     if abs(factor) < 10:
-        return sign +'00'+str(factor)
+        return sign +'00'+ '%.0d' % factor
     elif abs(factor) > 99:
-        return sign + str(factor)
+        return sign + '%.0d' % factor
     else:
-        return sign + '0' + str(factor)
+        return sign + '0' + '%.0d' % factor
 
 class RoboDrive:
     """
