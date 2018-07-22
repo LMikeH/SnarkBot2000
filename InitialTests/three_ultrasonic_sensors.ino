@@ -74,10 +74,6 @@ void loop() {
   distance3 = distance3/2;                //Remember ping travels to target and back from target, so you must divide by 2 for actual target distance.
   distance3 = distance3*63360;            //Convert miles to inches by multipling by 63360 (inches per mile)
 
-  distance2 = 0.00;
-  distance3 = 1.11;
-  //sprintf(distances, "%.2f_%.2f_%.2f", distance1, distance2, distance3);
-  //dtostrf(distance1, 2, 2, distances);
   char str1[12];
   char str2[12];
   char str3[12];
