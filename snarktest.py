@@ -9,17 +9,23 @@ motorser = serial.Serial('/dev/ttyACM1', 9600)
 ultraser = serial.Serial('/dev/ttyACM0', 9600)
 
 motor = mc.RoboDrive(motorser)
+motorser.flushInput()
+ultraser.flushInput()
 
 ang = 0
-time.sleep(1)
+#time.sleep(1)
+flush_count = 0
 while True:
     uray = hu.frontsonic(ultraser)
     print(uray)
-    while uray[0] > 5.0 and uray[1] > 5.0 and uray[2] > 5.0:
-        uray = hu.frontsonic(ultraser)
-        print(uray)
-        ang += .1
-        degrees = 30*np.sin(ang)
+    ang += .1
+    degrees = 30*np.sin(ang)
+    print(motorser.readline())
+    if uray[0] > 20.0 and uray[1] > 20.0 and uray[2] > 20.0:
         motor.move(100.0,degrees)
-        #print(motor.speedL,motor.speedR)
-        #time.sleep(.1)
+    else:
+        motor.move(0.0,degrees)
+    motorser.flushInput()
+    ultraser.flushInput()
+    motorser.flushOutput()
+    #time.sleep(.1)

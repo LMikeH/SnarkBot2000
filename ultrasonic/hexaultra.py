@@ -5,17 +5,17 @@ import numpy as np
 #ser = serial.Serial('/dev/ttyACM0', 9600)
 
 def frontsonic(ser):
-
     try:
-        frontstr = "motor"
-        while frontstr == "motor":
-            frontstr = ser.readline().decode()
+        frontstr = ser.readline().decode()
         sonray = frontstr.split('\n')[0].split('_')
-        return np.array(sonray,dtype=float)
+        if len(sonray) == 3:
+            return [float(sonray[0]),float(sonray[1]),float(sonray[2])]
+        else:
+            return [999,999,999]
     except ValueError:
-        return np.array([999,999,999])
+        return [999,999,999]
 
     
-
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 #while True:
-#    print(frontsonic())
+#    print(frontsonic(ser))

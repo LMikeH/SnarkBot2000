@@ -39,8 +39,8 @@ class RoboDrive:
         Lstr = speedstring(self.speedL)
         Rstr = speedstring(self.speedR)
         motorstr = '{},{}'.format(Lstr,Rstr)
-        print(motorstr)
         self.ser.write(motorstr.encode())
+        self.ser.flush()
 
     def move(self,speed,angle):
         turn_adjustment = np.cos(np.pi*angle/180.0)
