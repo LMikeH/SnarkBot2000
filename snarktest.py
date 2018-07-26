@@ -19,14 +19,17 @@ while True:
     print(uray)
     ang += .1
     degrees = 30*np.sin(ang)
-    #print(motorser.readline())
+    print(motorser.readline())
     if uray[0] > 20.0 and uray[1] > 20.0 and uray[2] > 20.0:
         motor.move(100.0,degrees)
     else:
         motor.move(0.0,degrees)
     #motorser.flushInput()
-    ultraser.flushInput()
+    if flush_count > 10:
+        ultraser.flushInput()
+        motorser.flushOutput()
     #motorser.flushOutput()
     #ultraser.flushOutput()          # added
     #time.sleep(.0001)
-    print(time.time()-start)
+    #print(time.time()-start)
+    flush_count += 1
